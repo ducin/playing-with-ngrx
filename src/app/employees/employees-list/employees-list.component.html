@@ -1,0 +1,22 @@
+<button [style.color]="color$ | async" (click)='reload()'>reload!</button>
+<button (click)=showDetails(null)>reset employee</button>
+
+{{ chosenEmployeeId$ | async }}
+{{ chosenEmployee$ | async | json }}
+
+<br />
+
+<div *ngIf="!(loading$ | async); else loadingBlock">
+  <ul>
+    <li (click)=showDetails(e.id) *ngFor="let e of employees$ | async">
+      {{ e.firstName }}
+      {{ e.lastName }},
+      {{ e.salary }}$,
+      {{ e.nationality }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #loadingBlock>
+  <app-loader></app-loader>
+</ng-template>
